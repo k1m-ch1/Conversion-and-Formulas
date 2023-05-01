@@ -1,0 +1,21 @@
+html {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  text-align: center;
+}
+
+.side-bar {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.main-content {
+  display: inline-block;
+}
