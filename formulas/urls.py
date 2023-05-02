@@ -4,6 +4,7 @@ from . import views
 app_name = "formulas"
 
 urlpatterns = [
-    path('', views.index, name="nav")
+    path('', views.index, name="nav"),
+    path('formulas/<str:type>/', views.handle_type)
 ]
 

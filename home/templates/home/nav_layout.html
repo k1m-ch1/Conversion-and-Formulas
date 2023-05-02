@@ -1,0 +1,24 @@
+{% extends 'home/layout.html' %}
+{% block title%}
+{{ title }}
+{% endblock %}
+{% block heading %}
+{{ title }}
+{% endblock %}
+{% block body%}
+<section>
+  <h2>
+    {{ classification }}
+  </h2>
+  <ul>
+    
+    {% for i, i_cap in nav_name %}
+    <li>
+      <a href="{{name_app}}/{{i}}" style="text-decoration: underlined; color: blue; font-style: italic;">
+          {{ i_cap }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
