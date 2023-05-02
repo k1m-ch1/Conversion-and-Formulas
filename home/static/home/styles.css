@@ -8,7 +8,7 @@ h1 {
 }
 
 body {
-  text-align: center;
+  text-align: left;
 }
 
 .side-bar {
@@ -18,4 +18,18 @@ body {
 
 .main-content {
   display: inline-block;
+}
+
+nav ul li a {
+  text-decoration: none;
+}
+
+.generic-nav li{
+  list-style-type: none;
+}
+
+.logo {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2em;
+  font-weight: bold;
 }

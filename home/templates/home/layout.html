@@ -7,7 +7,28 @@
   </head>
   <body>
     <div class="side-bar">
-      <h1>Chicken</h1>
+      <label class="logo">
+        Unit converter and Formulas
+      </label>
+      <nav>
+        <ul class="generic-nav">
+          <li>
+            <a href="{% url "home:nav" %}">
+                Home 🏠
+            </a>
+          </li>
+          <li>
+            <a href="{% url "conversion:nav" %}">
+                Unit Converter
+            </a>
+          </li>
+          <li>
+            <a href="{% url "formulas:nav" %}">
+                Formulas
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
     <div class="main-content">
       <h1>{% block heading %}{% endblock %}</h1>
