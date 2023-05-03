@@ -7,8 +7,12 @@
 {% endblock %}
 {% block body%}
 <section>
-  <h2>
+  <h2 style="display: flex; justify-content: space-between;">
     {{ classification }}
+    <form action="https://www.google.com/search">
+      <input type="hidden" name="q" value="{{ classification }}">
+      <input type="submit" value="Google Search">
+    </form>
   </h2>
   <form method="post">
     {% csrf_token %}
@@ -19,7 +23,7 @@
         <label for="unit-box">{{i}}</label>
         </td>
         <td>
-        <input id="unit-box" type="number" step="0.001" name="{{i}}">
+        <input required id="unit-box" type="number" step="0.001" name="{{i}}">
         </td>
         <td>
         <label id="unit"> {{unit}} </label>
@@ -27,7 +31,12 @@
       </tr>
       {% endfor %}
     </table>
-    <input type="submit">
+    <input type="submit" class="submit-button">
   </form>
+</section>
+<section class="result-box">
+{% if result %}
+<h2>Your Results: {{result}} </h2>
+{% endif %}
 </section>
 {% endblock %}

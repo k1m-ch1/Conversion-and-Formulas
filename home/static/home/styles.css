@@ -106,3 +106,7 @@ h1 {
 .side-bar > nav{
   font-size: 1.5rem;
 }
+
+.result-box {
+  box-shadow: 0 0 5px 1;
+}

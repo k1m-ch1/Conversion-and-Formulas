@@ -132,12 +132,13 @@ def handle_type(request, type):
   })
 
 def handle_formula(request, formula_type, formula):
-  if request.method == "POST":
-    return HttpResponse(f"{formulas[formula].calculate(request)}")
-  return render(request, 'formulas/formula.html', {
+  dict_to_send = {
     "name_app":"formulas",
     "classification": formula.capitalize(),
     "nav_name": formulas[formula].get_variables(),
     "title" : formula.capitalize(),
     "heading": "Formulas", 
-  })
+    "result":None,
+  }
+  if request.method == "POST":  dict_to_send["result"] = formulas[formula].calculate(request)
+  return render(request, 'formulas/formula.html', dict_to_send)
