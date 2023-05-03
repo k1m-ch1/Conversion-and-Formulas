@@ -5,5 +5,5 @@ app_name = "conversion"
 
 urlpatterns = [
     path('', views.index, name="nav"),
-    path('conversion/<str:type>/', views.handle_type, name="length"),
+    path('<str:type>/', views.handle_type, name="length"),
 ]

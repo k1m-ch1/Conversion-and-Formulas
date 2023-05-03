@@ -5,6 +5,7 @@ app_name = "formulas"
 
 urlpatterns = [
     path('', views.index, name="nav"),
-    path('formulas/<str:type>/', views.handle_type)
+    path('<str:type>/', views.handle_type),
+    path('<str:formula_type>/<str:formula>/', views.handle_formula)
 ]
 
