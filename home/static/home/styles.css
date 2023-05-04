@@ -99,7 +99,7 @@ h1 {
 
 .side-bar > nav > ul > li > a > div:active {
   color: grey;
-  background-color: red;
+  background-color: blue;
 }
 
 .side-bar > nav{
@@ -108,4 +108,28 @@ h1 {
 
 .result-box {
   box-shadow: 0 0 5px 1;
+}
+
+input[type="submit"]{
+  background-color: blue;
+  color: white;
+  font-family: 'Arial Narrow Bold', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border-radius: 0.2em;
+  margin: 0;
+  width: 100%;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.8;
+}
+
+input[type="submit"]:active {
+  opacity: 0.5;
+}
+
+.google-search input[type="submit"]{
+  background-color: red;
 }

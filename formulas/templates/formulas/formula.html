@@ -9,10 +9,20 @@
 <section>
   <h2 style="display: flex; justify-content: space-between;">
     {{ classification }}
-    <form action="https://www.google.com/search">
-      <input type="hidden" name="q" value="{{ classification }}">
-      <input type="submit" value="Google Search">
-    </form>
+    <div class="google-search">
+      <form action="https://www.google.com/search">
+        <input type="hidden" name="q" value="{{ classification }}">
+        <input type="submit" value="Google Search">
+      </form>
+      <form action="https://www.google.com/search">
+        <input type="hidden" name="q" value="{{ heading }} {{ classification }} unit">
+        <input type="submit" value="Get Units">
+      </form>
+      <form action="https://www.google.com/search">
+        <input type="hidden" name="q" value="{{ heading }} {{ classification }} formulas">
+        <input type="submit" value="More Formulas">
+      </form>
+    </div>
   </h2>
   <form method="post">
     {% csrf_token %}
@@ -31,7 +41,10 @@
       </tr>
       {% endfor %}
     </table>
-    <input type="submit" class="submit-button">
+    <br>
+    <div style="display: inline-block;">
+      <input type="submit" class="submit-button">
+    </div>
   </form>
 </section>
 <section class="result-box">

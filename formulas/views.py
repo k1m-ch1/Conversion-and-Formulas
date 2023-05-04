@@ -60,18 +60,6 @@ class formula:
     
     return self.modifier(functools.reduce(add, map(evaluate_fraction, variables_temp), 0)) 
       
-      
-      
-
-
-type_of_formulas = ["area", "volume", "electricity", "kinematics", "thermodynamics"]
-nav_in_type_of_formulas = {
-  "area":["square", "rectangle", "right triangle", "circle"],
-  "volume":["cube", "cuboid", "cylinder", "cone", "sphere"],
-  "electricity":["resistance", "current", "voltage", "capacitance"],
-  "kinematics":["velocity", "acceleration"],
-  "thermodynamics":["heat"]
-  }
 BASE = ('base', 'm')
 LENGTH = ('length', 'm')
 HEIGHT = ('height', 'm')
@@ -92,23 +80,32 @@ RESISTANCE = ('resistance', 'ohm')
 TEMPERATURE = ('temperature', 'k')
 MASS = ('mass', 'kg')
 
-formulas = {'square': formula([((LENGTH, LENGTH), 1)]), 
-            'rectangle': formula([((LENGTH, HEIGHT),1)]), 
-            'right triangle': formula([((BASE, BASE),1), ((HEIGHT, HEIGHT),1)], math.sqrt),
-            'circle': formula([((math.pi, RADIUS, RADIUS), 1)]), 
-            'cube': formula([((LENGTH, LENGTH, LENGTH),1)]),
-            'cuboid': formula([((LENGTH, BASE, HEIGHT),1)]), 
-            'cylinder': formula([((math.pi, RADIUS, RADIUS, HEIGHT), 1)]), 
-            'cone': formula([((1/3,RADIUS, RADIUS, math.pi),1)]), 
-            'sphere': formula([((4/3, RADIUS, RADIUS, RADIUS, math.pi),1)]), 
-            'resistance': formula([((RESISTIVITY, LENGTH), (AREA,))]), 
-            'current': formula([((CHARGE,),(TIME,))]), 
-            'voltage': formula([((CURRENT, RESISTANCE), 1)]), 
-            'capacitance': formula([((CHARGE,VOLTAGE),1)]), 
-            'velocity': formula([((DISTANCE,),(TIME,))]), 
-            'acceleration': formula([((VELOCITY,),(TIME,))]), 
-            'heat': formula([((MASS, HEAT_CAPACITY, TEMPERATURE),1)])}
+formula_data = {
+    "area": {'square': formula([((LENGTH, LENGTH), 1)]),
+             'rectangle': formula([((LENGTH, HEIGHT), 1)]),
+             'triangle': formula([((1/2, HEIGHT, BASE), 1)]),
+             'circle': formula([((math.pi, RADIUS, RADIUS), 1)])},
+    "volume": {'cube': formula([((LENGTH, LENGTH, LENGTH), 1)]),
+               'cuboid': formula([((LENGTH, BASE, HEIGHT), 1)]),
+               'cylinder': formula([((math.pi, RADIUS, RADIUS, HEIGHT), 1)]),
+               'cone': formula([((1/3, RADIUS, RADIUS, math.pi, HEIGHT), 1)]),
+               'sphere': formula([((4/3, RADIUS, RADIUS, RADIUS, math.pi), 1)]), },
+    "electricity": {'resistance': formula([((RESISTIVITY, LENGTH), (AREA,))]),
+                    'current': formula([((CHARGE,), (TIME,))]),
+                    'voltage': formula([((CURRENT, RESISTANCE), 1)]),
+                    'capacitance': formula([((CHARGE, VOLTAGE), 1)])},
+    "kinematics": {'velocity': formula([((DISTANCE,), (TIME,))]),
+                   'acceleration': formula([((VELOCITY,), (TIME,))]), },
+    "thermodynamics": {'heat': formula([((MASS, HEAT_CAPACITY, TEMPERATURE), 1)])}
+}
+TYPE_OF_FORMULAS = list(formula_data.keys())
+FORMULA_IN_TYPE_OF_FORMULA = {k:list(v.keys()) for k, v in formula_data.items()}
 
+def update_dict(x, y):
+  y.update(x)
+  return y.copy()
+
+FORMULAS = functools.reduce(update_dict, formula_data.values(), dict())
 
 def capitalize(str):
   return str.capitalize()
@@ -117,7 +114,7 @@ def index(request):
   return render(request, 'home/nav_layout.html', {
     "name_app":"formulas",
     "classification": "Type of formulas",
-    "nav_name": zip(type_of_formulas, map(capitalize, type_of_formulas)),
+    "nav_name": zip(TYPE_OF_FORMULAS, map(capitalize, TYPE_OF_FORMULAS)),
     "title" : "Type of formulas",
     "heading": "Formulas"
   })
@@ -125,8 +122,8 @@ def index(request):
 def handle_type(request, type):
   return render(request, 'home/nav_layout.html', {
     "name_app":"formulas",
-    "classification": "Type of formulas",
-    "nav_name": zip(nav_in_type_of_formulas[type], map(capitalize, nav_in_type_of_formulas[type])),
+    "classification": type.capitalize(),
+    "nav_name": zip(FORMULA_IN_TYPE_OF_FORMULA[type], map(capitalize, FORMULA_IN_TYPE_OF_FORMULA[type])),
     "title" : "Type of formulas",
     "heading": "Formulas"
   })
@@ -135,10 +132,10 @@ def handle_formula(request, formula_type, formula):
   dict_to_send = {
     "name_app":"formulas",
     "classification": formula.capitalize(),
-    "nav_name": formulas[formula].get_variables(),
+    "nav_name": FORMULAS[formula].get_variables(),
     "title" : formula.capitalize(),
-    "heading": "Formulas", 
-    "result":None,
+    "heading": formula_type.capitalize(), 
+    "result": None,
   }
-  if request.method == "POST":  dict_to_send["result"] = formulas[formula].calculate(request)
+  if request.method == "POST":  dict_to_send["result"] = FORMULAS[formula].calculate(request)
   return render(request, 'formulas/formula.html', dict_to_send)
