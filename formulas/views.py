@@ -9,9 +9,9 @@ class formula:
   def __init__(self, variables, modifier=lambda x: x):
     """
       Variables is a list and in that list contains a tuple of tuple.
-      The first layer of tuple represents some variables that will add together.
+      The first layer of tuple represents some variables that will add together through functools.reduce -> float.
       The second layer of tuple represents a fraction where the top is the nominator and the bottom is the denominator.
-      The third layer of tuple represents tuples that will multiply it self.
+      The third layer of tuple represents tuples that will multiply it self through functools.reduce -> float.
       The fourth layer of tuple holds 2 info, ('name', 'unit'). Ex. ('radius', 'm')
       Ex.
     """
@@ -98,6 +98,7 @@ formula_data = {
                    'acceleration': formula([((VELOCITY,), (TIME,))]), },
     "thermodynamics": {'heat': formula([((MASS, HEAT_CAPACITY, TEMPERATURE), 1)])}
 }
+
 TYPE_OF_FORMULAS = list(formula_data.keys())
 FORMULA_IN_TYPE_OF_FORMULA = {k:list(v.keys()) for k, v in formula_data.items()}
 
