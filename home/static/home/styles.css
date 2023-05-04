@@ -14,7 +14,6 @@ h1 {
 
 body {
   text-align: left;
-
 }
 
 .side-bar {
@@ -100,7 +99,7 @@ h1 {
 
 .side-bar > nav > ul > li > a > div:active {
   color: grey;
-  background-color: blue;
+  background-color: red;
 }
 
 .side-bar > nav{
