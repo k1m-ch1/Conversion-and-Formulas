@@ -8,7 +8,7 @@ import math
 class formula:
   def __init__(self, variables, modifier=lambda x: x):
     """
-      Variables is a list and in that list contains a tuple of tuple.
+      variables is a list and in that list contains a tuple of tuple.
       The first layer of tuple represents some variables that will add together through functools.reduce -> float.
       The second layer of tuple represents a fraction where the top is the nominator and the bottom is the denominator.
       The third layer of tuple represents tuples that will multiply it self through functools.reduce -> float.
@@ -20,7 +20,7 @@ class formula:
   
   def get_variables(self):
     """
-      Get the name of all of the variables as a list of string.
+      Get the name of all of the variables as a list of tuples.
     """
     ret_val = list()
     for i in self.variables:
@@ -59,7 +59,7 @@ class formula:
     variables_temp = self.variables.copy()
     
     return self.modifier(functools.reduce(add, map(evaluate_fraction, variables_temp), 0)) 
-      
+
 BASE = ('base', 'm')
 LENGTH = ('length', 'm')
 HEIGHT = ('height', 'm')
@@ -79,6 +79,8 @@ AREA = ('area', 'm^2')
 RESISTANCE = ('resistance', 'ohm')
 TEMPERATURE = ('temperature', 'k')
 MASS = ('mass', 'kg')
+INITIAL_VELOCITY = ('initial velocity', 'ms^(-1)')
+FINAL_VELOCITY = ('final velocity', 'ms^(-1)')
 
 formula_data = {
     "area": {'square': formula([((LENGTH, LENGTH), 1)]),
@@ -95,12 +97,14 @@ formula_data = {
                     'voltage': formula([((CURRENT, RESISTANCE), 1)]),
                     'capacitance': formula([((CHARGE, VOLTAGE), 1)])},
     "kinematics": {'velocity': formula([((DISTANCE,), (TIME,))]),
-                   'acceleration': formula([((VELOCITY,), (TIME,))]), },
+                   'acceleration': formula([((VELOCITY,), (TIME,))]),
+                   'distance': formula([((INITIAL_VELOCITY, TIME),1), ((ACCELERATION, TIME, TIME),2)])},
     "thermodynamics": {'heat': formula([((MASS, HEAT_CAPACITY, TEMPERATURE), 1)])}
 }
 
 TYPE_OF_FORMULAS = list(formula_data.keys())
 FORMULA_IN_TYPE_OF_FORMULA = {k:list(v.keys()) for k, v in formula_data.items()}
+
 
 def update_dict(x, y):
   y.update(x)
