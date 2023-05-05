@@ -47,7 +47,7 @@ body {
   font-size: 3rem;
   font-weight: bold;
   color: white;
-  background-color: black;
+  background-color: rgb(158, 161, 212);
   padding: 0.25em 0.5em 0.25em 0.5em;
   /* background: linear-gradient(black, white) */
   text-align: center;
@@ -61,8 +61,8 @@ body {
 .main-content > h1 {
   text-align: center;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
-  color: orange;
-  background-color: blue;
+  color: rgb(241, 247, 181);
+  background-color: rgb(253, 138, 138);
   padding: 0.5em 0 0.5em 0;
 }
 
@@ -89,7 +89,7 @@ h1 {
 }
 
 .side-bar > nav > ul > li > a > div {
-  background-color: grey;
+  background-color: rgb(168, 209, 209);
   padding: 0.25em 0 0.25em 0;
 }
 
