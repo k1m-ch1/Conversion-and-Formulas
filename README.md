@@ -70,7 +70,14 @@ python manage.py runserver
 - has *formula* class needs a goofy ah made up data structure (4d array)
 
 #### 4d array
-- Overview: this array is just a way to represent some generic math formulas. (it can do +, -, *, / operation but doesn't have sqrt(), raise to power, raise to log and stuff like that. (can apply but only to the whole thing for example can still do sqrt(pow(a, 2) + pow(b, 2))) but not sqrt(pow(a, 2)) + sqrt(pow(b, 2))
+- Overview: this array is just a way to represent some generic math formulas. (it can do +, -, *, / operation but doesn't have sqrt(), raise to power, raise to log and stuff like that. (can apply but only to the whole thing for example can still do 
+```python
+sqrt(pow(a, 2) + pow(b, 2)))
+```
+but not 
+```python
+sqrt(pow(a, 2)) + sqrt(pow(b, 2))
+```
 - first array is a list which will gets added together through functools.reduce(add, *insert 4d array*(not real syntax),  0)
 - second array is a tuple of size constant size 2 which represents a fraction with nominator and denominator
 - third array is a tuple representing stuff that will get multiplied together through functools.reduce(mul, *insert 2d tuple*(not real syntax), 1)
