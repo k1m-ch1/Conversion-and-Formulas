@@ -1,4 +1,5 @@
 {% extends 'home/layout.html' %}
+{% load static %}
 
 {% block title%}
 Home
@@ -13,11 +14,31 @@ Conversion and Formulas
     <ul>
       <li>Conversion between different unit of measurement</li>
       <li>Calculations to find variables in mathematics and physics</li>
-      <li>Super awesome design that's captivating to the user</li>
+      <li>Super awesome design that's captivating to the user (9 out of 10 dentists agree and recommend)</li>
       <li>VERY interactive user interface</li>
-      <li>Responsive web design</li>
-      <li>Super clean and bug-free code</li>
-      <li>Uses the principle of DRY (Don't Repeat Yourself)</li>
+      <li>Responsive web design (the nav bar change color when you press 🤯😲😲)</li>
+      <li>Super clean and bug-free code 
+        <figure>
+          <img src="{% static 'images/one_line.png'%}">
+          <figcaption>
+            Example of super clean and bug-free code
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="{% static 'images/another_example_of_scabf_code.png'%}">
+          <figcaption>
+            Another example of super clean and bug-free code
+          </figcaption>
+        </figure>
+      </li>
+      <li>Uses the principle of DRY (Don't Repeat Yourself)
+        <figure>
+          <img src="{% static 'images/super_clean_and_bug_free_code.png'%}">
+          <figcaption>
+            Example of DRY code
+          </figcaption>
+        </figure>
+      </li>
     </ul>
   </p>
 </section>
